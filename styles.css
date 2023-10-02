@@ -1,0 +1,31 @@
+* {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: black;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: 1fr 4fr;
+}
+
+.header-container {
+    background-color: black;
+    color: white;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+.body-container {
+    background: linear-gradient(360deg, #5b005b, transparent);
+    color: white;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
