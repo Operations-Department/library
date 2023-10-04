@@ -9,7 +9,7 @@ body {
     height: 100vh;
     width: 100vw;
     display: grid;
-    grid-template-rows: 1fr 4fr;
+    grid-template-rows: 1fr 5fr;
 }
 
 .header-container {
@@ -19,6 +19,7 @@ body {
     grid-template-columns: 1fr 1fr;
     justify-items: center;
     align-items: center;
+    border-bottom: 1px solid #fbc02d;
 }
 
 .logo-container {
@@ -29,16 +30,16 @@ body {
     align-items: center;
 }
 
+.my-svg {
+    filter: invert(100%) sepia(99%) saturate(3%) hue-rotate(250deg) brightness(107%) contrast(100%);
+}
+
 .icon {
     height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-}
-
-.my-svg {
-    filter: invert(100%) sepia(11%) saturate(6985%) hue-rotate(221deg) brightness(117%) contrast(109%);
 }
 
 .image-container {
@@ -54,10 +55,12 @@ body {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-end;
+    gap: 35px;
+    margin-right: 100px;
 }
 
-.button > button {
+.button{
     transition: ease-in-out 0.2s;
     width: 8rem;
     height: 3.5rem;
@@ -69,7 +72,7 @@ body {
     font-size: 1.5rem;
 }
 
-.button > button:hover {
+.button:hover {
     cursor: pointer;
     transform: scale(1.2);
     background: white;
@@ -84,5 +87,26 @@ body {
     color: white;
     height: 100%;
     display: grid;
+    grid-template-rows: 1fr 4fr;
     grid-template-columns: repeat(4, 1fr);
+}
+
+.add-book-button-container {
+    grid-column: 1 / 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-book-button-container > button {
+    height: 5rem;
+    width: 5rem;
+    font-size: 5rem;
+    line-height: 0px;
+    transform: rotate(180deg); /* cancels transform:scale(); if placed under :hover*/
+}
+
+.add-book-button-container > button:hover {
+    border-radius: 60px;
+    transform: scale(1.3);
 }
