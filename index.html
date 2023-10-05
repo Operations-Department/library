@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <link href="script.js" defer><script ></script>
+    <script src="script.js" defer></script>
     <title>Library</title>
     <link rel="icon" type="image/x-icon" href="img/book-open-page-variant-outline.svg">
 </head>
@@ -25,9 +25,14 @@
             <div class="log-in"><button class="button">Log-in</button></div>
         </div>
     </div>
+    <div id="book-form">
+        <button id="submit">Okay!</button>
+        <button id="cancel">Cancel</button>
+    </div>
     <div class="body-container">
         <div class="add-book-button-container">
-            <button class="button">+</button>
+            <button id="add-book-button" class="button ">+</button>
+            <div id="add-book-text" class="add-book-text">Add Book!</div>
         </div>
         <div class="card"></div>
         <div class="card"></div>
