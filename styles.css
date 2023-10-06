@@ -74,7 +74,6 @@ body {
 
 .button:hover {
     cursor: pointer;
-    transform: scale(1.2);
     background: white;
     color: #5b005b;
     border: 3px solid #5b005b; 
@@ -83,35 +82,46 @@ body {
 }
 
 .add-book-button-container {
-    grid-column: 1 / 5;
+    grid-column: 1 / -1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.add-book-button-container > button {
+.add-button-wrapper {
+    animation: bounce 5s infinite alternate;
+}
+
+#add-book-button {
     height: 4rem;
     width: 4rem;
     font-size: 5rem;
     line-height: 0px;
-    transform: rotate(180deg);
     border: 2px solid white;
-    animation: moveUpDown 2s infinite alternate;
+    animation: turn 12s infinite;
 }
 
-@keyframes moveUpDown {
+@keyframes turn {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bounce {
     0% {
         transform: translateY(0);
     }
     100% {
-        transform: translateY(-15px);
+        transform: translateY(-35px);
     }
 }
 
-.add-book-button-container > button:hover {
+#add-book-button:hover {
     border-radius: 60px;
-    transform: scale(1.2);
 }
 
 .add-book-text {
@@ -185,7 +195,7 @@ input[type="checkbox"] {
     
 }
 
-#submit:hover{
+#submit:hover {
     color: rgb(19, 112, 0);
     background: none;
     border: 2px solid rgb(19, 112, 0);
@@ -210,7 +220,48 @@ input[type="checkbox"] {
     background: linear-gradient(360deg, #5b005b, transparent);
     color: white;
     height: 100%;
+    padding: 0 10rem;
     display: grid;
     grid-template-rows: 1fr 4fr;
-    grid-template-columns: repeat(4, 1fr);
+    /* grid-template-columns: repeat(3, 1fr); */
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-row: auto;
+    gap: 35px;
+    overflow: hidden;
+}
+
+.domBookCard {
+    display: grid;
+    grid-template-rows: 2fr 2fr 2fr 1fr 1fr;
+    gap: 5px;
+    color: white;
+    justify-items: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 1px solid #fbc02d;
+    height: 300px;
+    padding: 20px;
+    overflow-wrap: anywhere;
+    text-align: center;
+}
+
+.domReadButton,
+.domRemoveButton {
+    transition: ease-in-out 0.2s;
+}
+
+.domReadButton:hover {
+    background: none;
+    color: white;
+    border: 1px solid white;
+}
+
+.domRemoveButton:hover { 
+    color: white;
+    background: rgba(154, 0, 0);
+    border: none;
 }
