@@ -25,24 +25,26 @@
             <div class="log-in"><button class="button">Log-in</button></div>
         </div>
     </div>
-    <div id="book-form-container">
-        <form id="book-form" action="" method="">
-            <h1>Add new book</h1>
-            <!-- <label for="title"></label> -->
-            <input type="text" id="title" placeholder="Title" name="title" required>
-            <!-- <label for="author"></label> -->
-            <input type="text" id="author" placeholder="Author" name="author" required>
-            <!-- <label for="pages"></label> -->
-            <input type="number" id="pages" placeholder="Pages" name="pages" required>
-            <div class="radio-check">
-                <label for="read-status"><p>Have you read it?</p></label>
-                <input type="checkbox" id="read-status">
-            </div>
-            <div class="form-button-container">
-                <button id="submit" class="button" type="submit">Submit</button>
-                <button id="cancel" class="button">Cancel</button>
-            </div>
-        </form>
+    <div id="book-form-overlay">
+        <div id="book-form-container">
+            <form id="book-form" action="" method="post">
+                <h1>Add new book</h1>
+                <label for="title"></label>
+                <input type="text" id="title" placeholder="Title" name="title" minlength="1" maxlength="100" required>
+                <label for="author"></label>
+                <input type="text" id="author" placeholder="Author" name="author" minlength="1" maxlength="100" required>
+                <label for="pages"></label>
+                <input type="number" id="pages" placeholder="Pages" name="pages" minlength="1" maxlength="100" required>
+                <div class="radio-check">
+                    <label for="read-status"><p>Have you read it?</p></label>
+                    <input type="checkbox" id="read-status">
+                </div>
+                <div class="form-button-container">
+                    <button id="submit" class="button" type="submit">Submit</button>
+                    <button id="cancel" class="button">Cancel</button>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="body-container">
         <div class="add-book-button-container">

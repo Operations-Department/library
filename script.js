@@ -1,6 +1,7 @@
 const addBookText = document.getElementById('add-book-text'); // connect html elements to the dom
 const addBookButton = document.getElementById('add-book-button');
 const bookFormContainer = document.getElementById('book-form-container');
+const bookFormOverlay = document.getElementById('book-form-overlay');
 const bookForm = document.getElementById('book-form');
 const bookFormCancelButton = document.getElementById('cancel');
 const bookFormSubmitButton = document.getElementById('submit');
@@ -15,19 +16,25 @@ addBookButton.addEventListener('mouseout', function() {
 })
 addBookButton.addEventListener('click', function() {
     bookFormContainer.style.display = 'block';
+    bookFormOverlay.style.display = 'block';
     addBookButton.style.display = 'none';
 })
 bookFormCancelButton.addEventListener('click', function() {
     bookFormContainer.style.display = '';
+    bookFormOverlay.style.display = '';
     addBookButton.style.display = '';
     bookForm.reset();
 })
 
+let formIsValid;
 
 bookFormSubmitButton.addEventListener('click', function(event) {
-    event.preventDefault(); //prevent from from submitting and refreshing page
-    const title = document.getElementById('title').value;
-    const author = document.getElementById('author').value;  // attach variables to form elements
+    formIsValid = false;
+    validateForm(); //forces html input requirements
+    if (formIsValid === false) return;
+    event.preventDefault(); //prevent form from submitting and refreshing page
+    const title = document.getElementById('title').value; // attach variables to form elements
+    const author = document.getElementById('author').value;  
     const pages = document.getElementById('pages').value;
     const read = document.getElementById('read-status').checked;
 
@@ -36,14 +43,25 @@ bookFormSubmitButton.addEventListener('click', function(event) {
     addBookToLibrary(newBook);
     displayBooks();
 
-    //clear the form
+    //clear the form and overlay
     bookForm.reset();
     bookFormContainer.style.display = '';
+    bookFormOverlay.style.display = '';
     addBookButton.style.display = '';
-    console.log(myLibrary);
 })
 
-//Book constructor
+//forces html input requirements
+function validateForm() {
+    let titleField = document.forms['book-form']['title'].value;
+    let authorField = document.forms['book-form']['author'].value;
+    let pagesField = document.forms['book-form']['pages'].value;
+    if (titleField == '') return false;
+    if (authorField == '') return false;
+    if (pagesField == '') return false;
+    return formIsValid = true;
+}
+
+//book constructor
 function Book(title, author, pages, read) {
     this.title = title
     this.author = author
@@ -51,28 +69,18 @@ function Book(title, author, pages, read) {
     this.read = read
 }
 
+
 Book.prototype.toggleReadStatus = function() {
     this.read = !this.read; //toggle the "read" status
 }
 
 const myLibrary = [];
-//////////////////////////////////////////////// test books
-const initialBook = new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling", 223, true);
-addBookToLibrary(initialBook);
-const secondBook = new Book("The Chamber of Secrets", "J.K. Rowling", 384, false);
-addBookToLibrary(secondBook);
-const third = new Book("The Prisoner of Azkaban", "J.K. Rowling", 317, true);
-addBookToLibrary(third);
-const fourth = new Book("The Goblet of Fire", "J.K. Rowling", 636, false);
-addBookToLibrary(fourth);
-displayBooks();
-////////////////////////////////////////////////
 
 function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
-function displayBooks() {
+function displayBooks() { //displays each object in array to page
     userCardContainer.innerHTML = '';
 
     for (i = 0; i < myLibrary.length; i++) {
@@ -80,6 +88,7 @@ function displayBooks() {
         if (myLibrary.length > 0) {
             const book = myLibrary[i];
             
+            //create each element of book card
             const bookDiv = document.createElement('div');
 
             const bookTitle = document.createElement('h2');
@@ -93,7 +102,7 @@ function displayBooks() {
 
             const domReadButton = document.createElement('button');
             domReadButton.textContent = 'Read';
-            if (book.read) {
+            if (book.read) { //correct read-status orientation from the outset
                 domReadButton.classList.remove('not-read-yet');
                 domReadButton.classList.add('already-read');
                 domReadButton.textContent = 'Completed!';
@@ -106,13 +115,13 @@ function displayBooks() {
             const domRemoveButton = document.createElement('button');
             domRemoveButton.textContent = 'Remove';
 
-            bookDiv.classList.add('domBookCard');
+            bookDiv.classList.add('domBookCard'); // add css to book elements
             domReadButton.classList.add('domReadButton');
             domReadButton.classList.add('button');
             domRemoveButton.classList.add('domRemoveButton');
             domRemoveButton.classList.add('button');
 
-            userCardContainer.appendChild(bookDiv);
+            userCardContainer.appendChild(bookDiv); //add book and book elements to page
             bookDiv.appendChild(bookTitle);
             bookDiv.appendChild(bookAuthor);
             bookDiv.appendChild(bookPages);
@@ -124,9 +133,9 @@ function displayBooks() {
                 
                 if (bookIndex !== -1) {
                     const book = myLibrary[bookIndex]; //access the specific book object
-                book.toggleReadStatus();
+                    book.toggleReadStatus();
 
-                if (book.read) {
+                if (book.read) { //change read button, 
                     domReadButton.classList.remove('not-read-yet');
                     domReadButton.classList.add('already-read');
                     domReadButton.textContent = 'Completed!';
@@ -142,7 +151,6 @@ function displayBooks() {
                 const bookIndex = myLibrary.indexOf(book); //find book index
                 if (bookIndex !== -1) myLibrary.splice(bookIndex, 1); //remove index
                 displayBooks(); //update display
-                console.log(myLibrary);
             })
         }
     }
