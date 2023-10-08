@@ -22,6 +22,8 @@ bookFormCancelButton.addEventListener('click', function() {
     addBookButton.style.display = '';
     bookForm.reset();
 })
+
+
 bookFormSubmitButton.addEventListener('click', function(event) {
     event.preventDefault(); //prevent from from submitting and refreshing page
     const title = document.getElementById('title').value;
@@ -49,9 +51,13 @@ function Book(title, author, pages, read) {
     this.read = read
 }
 
+Book.prototype.toggleReadStatus = function() {
+    this.read = !this.read; //toggle the "read" status
+}
+
 const myLibrary = [];
 //////////////////////////////////////////////// test books
-const initialBook = new Book("The Philosopher's Stone", "J.K. Rowling", 223, true);
+const initialBook = new Book("Harry Potter and the Philosopher's Stone", "J.K. Rowling", 223, true);
 addBookToLibrary(initialBook);
 const secondBook = new Book("The Chamber of Secrets", "J.K. Rowling", 384, false);
 addBookToLibrary(secondBook);
@@ -87,6 +93,15 @@ function displayBooks() {
 
             const domReadButton = document.createElement('button');
             domReadButton.textContent = 'Read';
+            if (book.read) {
+                domReadButton.classList.remove('not-read-yet');
+                domReadButton.classList.add('already-read');
+                domReadButton.textContent = 'Completed!';
+            } else {
+                domReadButton.classList.remove('already-read');
+                domReadButton.classList.add('not-read-yet');
+                domReadButton.textContent = 'Not read yet';
+            }
 
             const domRemoveButton = document.createElement('button');
             domRemoveButton.textContent = 'Remove';
@@ -103,9 +118,32 @@ function displayBooks() {
             bookDiv.appendChild(bookPages);
             bookDiv.appendChild(domReadButton);
             bookDiv.appendChild(domRemoveButton);
+
+            domReadButton.addEventListener('click', function() {
+                const bookIndex = myLibrary.indexOf(book); //find the index of the book associated with this button
+                
+                if (bookIndex !== -1) {
+                    const book = myLibrary[bookIndex]; //access the specific book object
+                book.toggleReadStatus();
+
+                if (book.read) {
+                    domReadButton.classList.remove('not-read-yet');
+                    domReadButton.classList.add('already-read');
+                    domReadButton.textContent = 'Completed!';
+                } else {
+                    domReadButton.classList.remove('already-read');
+                    domReadButton.classList.add('not-read-yet');
+                    domReadButton.textContent = 'Not read yet';
+                }
+                }
+            })
+
+            domRemoveButton.addEventListener('click', function() {
+                const bookIndex = myLibrary.indexOf(book); //find book index
+                if (bookIndex !== -1) myLibrary.splice(bookIndex, 1); //remove index
+                displayBooks(); //update display
+                console.log(myLibrary);
+            })
         }
     }
 }
-
-// add read button toggle
-// add function to remove button to remove object

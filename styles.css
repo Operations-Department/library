@@ -198,12 +198,14 @@ input[type="checkbox"] {
 #submit:hover {
     color: rgb(19, 112, 0);
     background: none;
+    font-weight: normal;
     border: 2px solid rgb(19, 112, 0);
 }
 
 #cancel:hover {
     color: rgb(154, 0, 0);
     background: none;
+    font-weight: normal;
     border: 2px solid rgb(154, 0, 0);
 }
 
@@ -223,7 +225,6 @@ input[type="checkbox"] {
     padding: 0 10rem;
     display: grid;
     grid-template-rows: 1fr 4fr;
-    /* grid-template-columns: repeat(3, 1fr); */
 }
 
 .card-container {
@@ -252,16 +253,35 @@ input[type="checkbox"] {
 .domReadButton,
 .domRemoveButton {
     transition: ease-in-out 0.2s;
-}
-
-.domReadButton:hover {
-    background: none;
-    color: white;
-    border: 1px solid white;
+    width: 150px;
 }
 
 .domRemoveButton:hover { 
     color: white;
     background: rgba(154, 0, 0);
     border: none;
+    font-weight: normal;
+    border: 1px solid white;
+}
+
+.already-read {
+    background: rgb(19, 112, 0);
+}
+
+.already-read:hover {
+    background: rgb(19, 112, 0);
+    font-weight: normal;
+    color: white;
+    border: 1px solid white;
+}
+
+.not-read-yet {
+    background: rgb(154, 0, 0);
+}
+
+.not-read-yet:hover {
+    background: rgb(154, 0, 0);
+    font-weight: normal;
+    color: white;
+    border: 1px solid white;
 }
