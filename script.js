@@ -61,14 +61,15 @@ function validateForm() {
     return formIsValid = true;
 }
 
-//book constructor
-function Book(title, author, pages, read) {
-    this.title = title
-    this.author = author
-    this.pages = pages 
-    this.read = read
+//book class - object constructor
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title
+        this.author = author
+        this.pages = pages 
+        this.read = read
+    }
 }
-
 
 Book.prototype.toggleReadStatus = function() {
     this.read = !this.read; //toggle the "read" status
